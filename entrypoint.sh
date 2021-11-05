@@ -31,19 +31,19 @@ select_anaylzer() {
 		3) echo -e "PHPCS Activated!";
 			echo -e "Analyzing Target Path: ${TARGET_PATH}...";
 			phpcs ${TARGET_PATH} 2>&1 | tee ${LOG_PATH}/phpcs.log; #run phpcs analyzer pointing to the project path and creates log file to log path
-			PHPCS_ERRORS=$(cat ${LOG_PATH}/phpcs.log | grep errors | awk '{print$3}'); #declare total errors variable
+			PHPCS_ERRORS=$(cat ${LOG_PATH}/phpcs.log | grep FOUND | tail -n1 | awk '{print$2}'); #declare total errors variable
 			echo -e "\nPHPCS Errors: ${PHPCS_ERRORS}";; #display total errors for phpcs
 		4) echo -e "Local PHP Security Checker Activated!";
 			echo -e "Analyzing Target Path: ${TARGET_PATH}...";
 			local-php-security-checker --path="${TARGET_PATH}" 2>&1 | tee ${LOG_PATH}/local-php-security-checker-1.log; #run local-php-security-checker analyzer pointing to the project path and creates log file to log path
 			local-php-security-checker --path="${TARGET_PATH}/composer.lock" 2>&1 | tee ${LOG_PATH}/local-php-security-checker-2.log; #run local-php-security-checker analyzer pointing to the project path composer lock file and creates log file to log path
-			LPHPSC_ERRORS_1=$(cat ${LOG_PATH}/local-php-security-checker-1.log | grep errors | awk '{print$3}'); #declare total errors variable
-			LPHPSC_ERRORS_2=$(cat ${LOG_PATH}/local-php-security-checker-2.log | grep errors | awk '{print$3}'); #declare total errors variable
-			echo -e "\nLocal PHP Security Checker Errors: ${LPHPSC_ERRORS_1}";; #display total errors for phpcpd
+			LPHPSC_ERRORS=$(cat ${LOG_PATH}/local-php-security-checker-1.log | sed -n 4p); #declare total errors variable
+			# LPHPSC_ERRORS_2=$(cat ${LOG_PATH}/local-php-security-checker-2.log | sed -n 4p); #declare total errors variable
+			echo -e "\nLocal PHP Security Checker Errors: ${LPHPSC_ERRORS}";; #display total errors for phpcpd
 		5) echo -e "PHPCPD Activated!";
 			echo -e "Analyzing Target Path: ${TARGET_PATH}...";
 			phpcpd analyse ${TARGET_PATH} 2>&1 | tee ${LOG_PATH}/phpcpd.log; #run phpcpd analyzer pointing to the project path and creates log file to log path
-			PHPCPD_ERRORS=$(cat ${LOG_PATH}/phpcpd.log | grep errors | awk '{print$3}'); #declare total errors variable
+			PHPCPD_ERRORS=$(cat ${LOG_PATH}/phpcpd.log | grep Found | tr -d :); #declare total errors variable
 			echo -e "\nPHPCPD Errors: ${PHPCPD_ERRORS}";; #display total errors for phpcpd
 		0) echo -e "Running All PHP Analyzers!";
 			echo -e "Analyzing Target Path: ${TARGET_PATH}...";
@@ -60,14 +60,13 @@ select_anaylzer() {
 			phpcpd analyse ${TARGET_PATH} 2>&1 | tee ${LOG_PATH}/phpcpd.log; #run phpcpd analyzer pointing to the project path and creates log file to log path
 			PHPLINT_ERRORS=$(cat ${LOG_PATH}/phplint.log | grep errors | awk '{print$3}'); #declare total errors variable
 			PHPSTAN_ERRORS=$(cat ${LOG_PATH}/phpstan.log | grep errors | awk '{print$3}'); #declare total errors variable
-			PHPCS_ERRORS=$(cat ${LOG_PATH}/phpcs.log | grep errors | awk '{print$3}'); #declare total errors variable
-			LPHPSC_ERRORS_1=$(cat ${LOG_PATH}/local-php-security-checker-1.log | grep errors | awk '{print$3}'); #declare total errors variable
-			LPHPSC_ERRORS_2=$(cat ${LOG_PATH}/local-php-security-checker-2.log | grep errors | awk '{print$3}'); #declare total errors variable
-			PHPCPD_ERRORS=$(cat ${LOG_PATH}/phpcpd.log | grep errors | awk '{print$3}'); #declare total errors variable
+			PHPCS_ERRORS=$(cat ${LOG_PATH}/phpcs.log | grep FOUND | tail -n1 | awk '{print$2}'); #declare total errors variable
+			LPHPSC_ERRORS=$(cat ${LOG_PATH}/local-php-security-checker-1.log | sed -n 4p); #declare total errors variable
+			PHPCPD_ERRORS=$(cat ${LOG_PATH}/phpcpd.log | grep Found | tr -d :); #declare total errors variable
 			echo -e "\nParallel Lint Errors: ${PHPLINT_ERRORS}"; #display total errors for phplint
 			echo -e "PHPStan Errors: ${PHPSTAN_ERRORS}"; #display total errors for phpstan
 			echo -e "PHPCS Errors: ${PHPCS_ERRORS}"; #display total errors for phpcs
-			echo -e "Local PHP Security Checker Errors: ${LPHPSC_ERRORS_1}"; #display total errors for phpcpd
+			echo -e "Local PHP Security Checker Errors: ${LPHPSC_ERRORS}"; #display total errors for phpcpd
 			echo -e "PHPCPD Errors: ${PHPCPD_ERRORS}";; #display total errors for phpcpd
 		*) echo -e "No Analyzer Selected."
 			echo -e "Exiting..."
