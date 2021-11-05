@@ -1,6 +1,7 @@
 #!/bin/sh
 
 export TARGET_PATH="/project"
+composer install
 
 alias choose_anaylzer="select_anaylzer"
 select_anaylzer() {
@@ -26,7 +27,8 @@ select_anaylzer() {
 			phpcs ${TARGET_PATH};;
 		4) echo -e "Local PHP Security Checker Activated!";
 			echo -e "Analyzing Target Path: ${TARGET_PATH}...";
-			local-php-security-checker analyse ${PROJECT_PATH};;
+			local-php-security-checker --path="${TARGET_PATH}";
+			local-php-security-checker --path="${TARGET_PATH}/composer.lock";;
 		5) echo -e "PHPCPD Activated!";
 			echo -e "Analyzing Target Path: ${TARGET_PATH}...";
 			phpcpd analyse ${TARGET_PATH};;

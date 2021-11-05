@@ -2,7 +2,13 @@
 
 This topic contains instructions for installing PHPQA using the Docker.
 
-## Run the PHPQA Docker image
+## Clone the repository
+
+```bash
+git clone https://github.com/markmon1919/kumu-php-analyzer.git
+```
+
+## Build the PHPQA Docker image
 
 Build the Docker image by executing the command:
 
@@ -20,4 +26,4 @@ docker run -it --rm <TAG_NAME> .
 
 - entrypoint.sh will run automatically
 
-- Default mounted TARET_PATH for Lumen is: /project
+- default mounted TARET_PATH for Lumen is : /project
