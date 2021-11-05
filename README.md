@@ -8,11 +8,13 @@ This topic contains instructions for installing PHPQA using Docker.
 git clone https://github.com/markmon1919/kumu-php-analyzer.git
 ```
 
-## Run the PHPQA using Docker Compose
+## Run the PHPQA using Docker compose
 
 ```bash
 docker-compose run phpqa
 ```
+
+| ----------- | ----------- |
 
 ## Build the PHPQA Docker image
 
