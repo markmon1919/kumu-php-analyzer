@@ -1,7 +1,0 @@
-[33mSymfony Security Check Report[0m
-[33m=============================[0m
-
-[32mNo packages have known vulnerabilities.[0m
-
-[33mNote that this checker can only detect vulnerabilities that are referenced in the security advisories database.
-Execute this command regularly to check the newly discovered vulnerabilities.[0m
