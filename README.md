@@ -1,6 +1,6 @@
 # PHPQA Docker image
 
-This topic contains instructions for installing PHPQA using the Docker.
+This topic contains instructions for installing PHPQA using Docker.
 
 ## Clone the repository
 
