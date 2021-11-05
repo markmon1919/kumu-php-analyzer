@@ -1,11 +1,11 @@
 version: '3.8'
 services:
     phpqa:
-      image: jakzal/phpqa:alpine
-      container_name: phpqa
       build:
         context: .
         dockerfile: ./Dockerfile
+      # image: jakzal/phpqa:alpine
+      container_name: phpqa
       volumes:
         - ./project:/project
 
