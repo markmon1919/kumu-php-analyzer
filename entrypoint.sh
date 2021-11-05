@@ -57,7 +57,7 @@ select_anaylzer() {
 			local-php-security-checker --path="${TARGET_PATH}"; #run local-php-security-checker analyzer pointing to the project path and creates log file to log path
 			local-php-security-checker --path="${TARGET_PATH}/composer.lock"; #run local-php-security-checker analyzer pointing to the project path composer lock file and creates log file to log path
 			echo -n ">>> Running PHPCPD"
-			phpcpd analyse ${TARGET_PATH};; #run phpcpd analyzer pointing to the project path and creates log file to log path
+			phpcpd analyse ${TARGET_PATH}; #run phpcpd analyzer pointing to the project path and creates log file to log path
 			PHPLINT_ERRORS=$(cat ${LOG_PATH}/phplint.log | grep errors | awk '{print$3}'); #declare total errors variable
 			PHPSTAN_ERRORS=$(cat ${LOG_PATH}/phpstan.log | grep errors | awk '{print$3}'); #declare total errors variable
 			PHPCS_ERRORS=$(cat ${LOG_PATH}/phpcs.log | grep errors | awk '{print$3}'); #declare total errors variable
