@@ -4,10 +4,13 @@ services:
       build:
         context: .
         dockerfile: ./Dockerfile
-      # image: jakzal/phpqa:alpine
       container_name: phpqa
       volumes:
         - ./project:/project
+        - ./log:/log
 
 volumes:
     project:
+      external: true
+    log:
+      external: true

@@ -5,6 +5,7 @@ RUN apk add --no-cache libxml2-dev \
 
 COPY ./project /project
 COPY ./entrypoint.sh /entrypoint.sh
+COPY ./log /log
 
 WORKDIR /
 
