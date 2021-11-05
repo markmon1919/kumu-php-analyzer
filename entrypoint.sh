@@ -47,17 +47,17 @@ select_anaylzer() {
 			echo -e "\nPHPCPD Errors: ${PHPCPD_ERRORS}";; #display total errors for phpcpd
 		0) echo -e "Running All PHP Analyzers!";
 			echo -e "Analyzing Target Path: ${TARGET_PATH}...";
-			echo -n ">>> Running Parallel Lint"
-			phplint analyse ${TARGET_PATH}; #run phplint analyzer pointing to the project path and creates log file to log path
-			echo -n ">>> Running PHPStan"
-			phpstan analyse ${TARGET_PATH}; #run phpstan analyzer pointing to the project path and creates log file to log path
-			echo -n ">>> Running PHPCS"
-			phpcs ${TARGET_PATH}; #run phpcs analyzer pointing to the project path and creates log file to log path
-			echo -n ">>> Running Local PHP Security Checker"
-			local-php-security-checker --path="${TARGET_PATH}"; #run local-php-security-checker analyzer pointing to the project path and creates log file to log path
-			local-php-security-checker --path="${TARGET_PATH}/composer.lock"; #run local-php-security-checker analyzer pointing to the project path composer lock file and creates log file to log path
-			echo -n ">>> Running PHPCPD"
-			phpcpd analyse ${TARGET_PATH}; #run phpcpd analyzer pointing to the project path and creates log file to log path
+			echo -n "\n>>> Running Parallel Lint"
+			phplint analyse ${TARGET_PATH} 2>&1 | tee ${LOG_PATH}/phplint.log; #run phplint analyzer pointing to the project path and creates log file to log path
+			echo -n "\n>>> Running PHPStan"
+			phpstan analyse ${TARGET_PATH} 2>&1 | tee ${LOG_PATH}/phpstan.log; #run phpstan analyzer pointing to the project path and creates log file to log path
+			echo -n "\n>>> Running PHPCS"
+			phpcs ${TARGET_PATH} 2>&1 | tee ${LOG_PATH}/phpcs.log; #run phpcs analyzer pointing to the project path and creates log file to log path
+			echo -n "\n>>> Running Local PHP Security Checker"
+			local-php-security-checker --path="${TARGET_PATH}" 2>&1 | tee ${LOG_PATH}/local-php-security-checker-1.log; #run local-php-security-checker analyzer pointing to the project path and creates log file to log path
+			local-php-security-checker --path="${TARGET_PATH}/composer.lock" 2>&1 | tee ${LOG_PATH}/local-php-security-checker-2.log; #run local-php-security-checker analyzer pointing to the project path composer lock file and creates log file to log path
+			echo -n "\n>>> Running PHPCPD"
+			phpcpd analyse ${TARGET_PATH} 2>&1 | tee ${LOG_PATH}/phpcpd.log; #run phpcpd analyzer pointing to the project path and creates log file to log path
 			PHPLINT_ERRORS=$(cat ${LOG_PATH}/phplint.log | grep errors | awk '{print$3}'); #declare total errors variable
 			PHPSTAN_ERRORS=$(cat ${LOG_PATH}/phpstan.log | grep errors | awk '{print$3}'); #declare total errors variable
 			PHPCS_ERRORS=$(cat ${LOG_PATH}/phpcs.log | grep errors | awk '{print$3}'); #declare total errors variable
