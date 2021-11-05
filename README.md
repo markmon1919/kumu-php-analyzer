@@ -14,7 +14,7 @@ git clone https://github.com/markmon1919/kumu-php-analyzer.git
 docker-compose run phpqa
 ```
 
-| ----------- | ----------- |
+***
 
 ## Build the PHPQA Docker image
 
