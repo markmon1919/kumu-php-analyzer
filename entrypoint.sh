@@ -1,7 +1,6 @@
 #!/bin/sh
 
 export TARGET_PATH="/project"
-composer install
 
 alias choose_anaylzer="select_anaylzer"
 select_anaylzer() {
