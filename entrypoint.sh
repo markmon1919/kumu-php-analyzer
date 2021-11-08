@@ -43,7 +43,7 @@ local_func() {
 
 phpcpd_func() {
 	echo -n "\n>>> Running PHPCPD"
-	phpcpd analyse ${TARGET_PATH} 2>&1 | tee ${LOG_PATH}/phpcpd.log; #run phpcpd analyzer pointing to the project path and creates log file to log path
+	phpcpd analyse ${TARGET_BASE} 2>&1 | tee ${LOG_PATH}/phpcpd.log; #run phpcpd analyzer pointing to the project path and creates log file to log path
 	PHPCPD_ERRORS=$(cat ${LOG_PATH}/phpcpd.log | grep Found | tr -d :); #declare total errors variable
 
 	# echo -e "PHPCPD Errors: ${PHPCPD_ERRORS}";; #display total errors for phpcpd
@@ -136,7 +136,7 @@ select_anaylzer() {
 			echo -e "\nParallel Lint Errors: ${PHPLINT_ERRORS}"; #display total errors for phplint
 			echo -e "PHPStan Errors: ${PHPSTAN_ERRORS}"; #display total errors for phpstan
 			echo -e "PHPCS Errors: ${PHPCS_ERRORS}"; #display total errors for phpcs
-			echo -e "Local PHP Security Checker Errors: ${LPHPSC_ERRORS}"; #display total errors for phpcpd
+			# echo -e "Local PHP Security Checker Errors: ${LPHPSC_ERRORS}"; #display total errors for phpcpd
 			echo -e "PHPCPD Errors: ${PHPCPD_ERRORS}"; #display total errors for phpcpd
 
 			summary_func;;
