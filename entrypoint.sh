@@ -134,9 +134,9 @@ select_anaylzer() {
 			echo -e "PHPStan Errors: ${PHPSTAN_ERRORS}"; #display total errors for phpstan
 			echo -e "PHPCS Errors: ${PHPCS_ERRORS}"; #display total errors for phpcs
 			echo -e "Local PHP Security Checker Errors: ${LPHPSC_ERRORS}"; #display total errors for phpcpd
-			echo -e "PHPCPD Errors: ${PHPCPD_ERRORS}";; #display total errors for phpcpd
+			echo -e "PHPCPD Errors: ${PHPCPD_ERRORS}"; #display total errors for phpcpd
 
-			summary_func
+			summary_func;;
 		*) echo -e "No Analyzer Selected."
 			echo -e "Exiting..."
 	esac
