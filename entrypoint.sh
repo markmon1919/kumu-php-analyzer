@@ -55,7 +55,7 @@ summary_func() {
 	a=$(cat log/phplint.log | grep errors | awk '{print$3}')
 	b=$(cat log/phpstan.log | grep errors | awk '{print$3}')
 	c=$(cat log/phpcs.log | grep FOUND | tail -n1 | awk '{print$2}')
-	d=$(cat log/phpcpd.log | grep Found | tr -d :)
+	d=$(cat log/phpcpd.log | grep Found | tr -d : | awk '{print$2}')
 
 	sum=`expr $a + $b + $c + $d`
 	echo "TOTAL ERRORS: $sum"
