@@ -4,6 +4,8 @@
 TARGET_PATH="/project/app" 
 LOG_PATH="/log"
 
+# rm -rf /log/*.log$
+
 phplint_func() {
 	echo -n "\n>>> Running Parallel Lint"
 	phplint analyse ${TARGET_PATH} 2>&1 | tee ${LOG_PATH}/phplint.log; #run phplint analyzer pointing to the project path and creates log file to log path
@@ -57,7 +59,7 @@ summary_func() {
 	c=$(cat log/phpcs.log | grep FOUND | tail -n1 | awk '{print$2}')
 	d=$(cat log/phpcpd.log | grep Found | tr -d : | awk '{print$2}')
 
-	sum=`expr $a + $b + $c + $d`
+	sum=`expr $b + $c`
 	echo "TOTAL ERRORS: $sum"
 }
 
