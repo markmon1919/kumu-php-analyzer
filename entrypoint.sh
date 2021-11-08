@@ -52,10 +52,10 @@ summary_func() {
 # PHPCS Errors: 831
 # Local PHP Security Checker Errors: No packages have known vulnerabilities.
 # PHPCPD Errors: Found 122 clones with 6298 duplicated lines in 149 files
-	a=`cat ${LOG_PATH}/phplint.log`
-	b=`cat ${LOG_PATH}/phpstan.log | grep errors | awk '{print$3}'`
-	c=`cat ${LOG_PATH}/phpcs.log | grep FOUND | tail -n1 | awk '{print$2}'`
-	d=`cat ${LOG_PATH}/phpcpd.log | grep Found | tr -d :`
+	a=$(cat log/phplint.log | grep errors | awk '{print$3}')
+	b=$(cat log/phpstan.log | grep errors | awk '{print$3}')
+	c=$(cat log/phpcs.log | grep FOUND | tail -n1 | awk '{print$2}')
+	d=$(cat log/phpcpd.log | grep Found | tr -d :)
 
 	sum=`expr $a + $b + $c + $d`
 	echo "TOTAL ERRORS: $sum"
